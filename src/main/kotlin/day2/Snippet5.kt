@@ -1,22 +1,22 @@
-package day2
-
-// ──────────────────────────────────────────────────────────────────────────────
-// Snippet 5 — Mixed null safety anti-patterns (hardest)
-// ──────────────────────────────────────────────────────────────────────────────
-// TODO: Rewrite using Kotlin idioms.
-//       Rules:
-//         - Remove ALL !! usages — replace with ?. and ?:
-//         - Use String templates instead of + concatenation
-//         - If name is missing, use "Unknown product"
-//         - If price is missing, use 0.0
-//         - One fix = one commit: fix: resolve NPE in formatProduct anti-patterns
-
+//package day2
+//
+//// ──────────────────────────────────────────────────────────────────────────────
+//// Snippet 5 — Mixed null safety anti-patterns (hardest)
+//// ──────────────────────────────────────────────────────────────────────────────
+//// TODO: Rewrite using Kotlin idioms.
+////       Rules:
+////         - Remove ALL !! usages — replace with ?. and ?:
+////         - Use String templates instead of + concatenation
+////         - If name is missing, use "Unknown product"
+////         - If price is missing, use 0.0
+////         - One fix = one commit: fix: resolve NPE in formatProduct anti-patterns
+//
 data class Product(val name: String?, val price: Double?)
 
 fun formatProduct(product: Product?): String {
-    val name = product!!.name!!       // 💥 !! used twice
-    val price = product!!.price!!     // 💥 !! used twice
-    return "$name costs $" + price.toString() // unsafe + concatenation
+    val name = product?.name?:"Unknow Product"    // 💥 !! used twice
+    val price = product?.price?:0.0     // 💥 !! used twice
+    return "$name costs $price " // unsafe + concatenation
 }
 
 fun main() {

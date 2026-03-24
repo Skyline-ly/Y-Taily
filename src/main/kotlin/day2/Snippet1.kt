@@ -16,5 +16,5 @@ fun findUserById(id: Int): String? {
 
 fun main() {
     val userName = findUserById(99)
-    println(userName.uppercase()) // 💥 CRASH: userName is null
+    println(userName?.uppercase()?:"User not found") // 💥 CRASH: userName is null
 }
